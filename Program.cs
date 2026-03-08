@@ -9,6 +9,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=huddle.db"));
 
 builder.Services.AddSignalR();
+builder.Services.AddControllers(); // Добавляем контроллеры
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -30,6 +31,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseCors("AllowAll");
+app.MapControllers(); // Добавляем маршруты контроллеров
 app.MapHub<ChatHub>("/chathub");
 
 // Получаем порт из переменной окружения или используем 5000 по умолчанию
