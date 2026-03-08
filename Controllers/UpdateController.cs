@@ -7,7 +7,7 @@ namespace HuddleServer.Controllers;
 [Route("api/[controller]")]
 public class UpdateController : ControllerBase
 {
-    private const string CurrentVersion = "1.0.1";
+    private const string CurrentVersion = "1.0.2";
     private const string DownloadUrl = "https://huddle-server-production-ea35.up.railway.app/api/updates/download";
     private readonly IWebHostEnvironment _env;
 
@@ -32,16 +32,16 @@ public class UpdateController : ControllerBase
         {
             version = CurrentVersion,
             downloadUrl = DownloadUrl,
-            releaseNotes = @"Что нового в версии 1.0.1:
-✅ Полная синхронизация профилей в реальном времени
-✅ Загрузка аватарок на сервер
-✅ Автоматическое обновление профилей у всех пользователей
-✅ Оптимизация производительности
-✅ Мгновенная отправка сообщений (без задержки)
-✅ Плавная прокрутка чата
-✅ Быстрая загрузка аватарок с кэшированием
-✅ Исправлены лаги и задержки",
-            isRequired = false,
+            releaseNotes = @"Что нового в версии 1.0.2:
+✅ Добавлен список чатов - все переписки теперь сохраняются
+✅ Две вкладки: 💬 Чаты и 🔍 Поиск
+✅ Автоматическое добавление чатов при получении сообщений
+✅ Быстрое переключение между чатами
+✅ Показывается последнее сообщение в каждом чате
+✅ ИСПРАВЛЕНО: дублирование сообщений полностью устранено
+✅ Улучшена стабильность работы мессенджера
+✅ Оптимизирована работа с сервером",
+            isRequired = true,
             fileSize = fileSize
         };
 
