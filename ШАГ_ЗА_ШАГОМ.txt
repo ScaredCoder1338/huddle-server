@@ -1,0 +1,97 @@
+═══════════════════════════════════════════════════════════
+  ✅ GIT УСТАНОВЛЕН! ТЕПЕРЬ ЗАГРУЗИ КОД НА GITHUB
+═══════════════════════════════════════════════════════════
+
+📌 ШАГ 1: ПЕРЕЗАПУСТИ ТЕРМИНАЛ
+
+1. Закрой текущий терминал (PowerShell)
+2. Открой новый терминал
+3. Перейди в папку: cd C:\Users\ssqj\Desktop\huddle\Huddle\HuddleServer
+
+───────────────────────────────────────────────────────────
+
+📌 ШАГ 2: НАСТРОЙ GIT (ПЕРВЫЙ РАЗ)
+
+Вставь эти команды (замени на свои данные):
+
+git config --global user.name "ScaredCoder1338"
+git config --global user.email "твой@email.com"
+
+⚠️ Используй тот же email, что и на GitHub!
+
+───────────────────────────────────────────────────────────
+
+📌 ШАГ 3: ЗАГРУЗИ КОД НА GITHUB
+
+Вставляй команды ПО ОДНОЙ, жми Enter после каждой:
+
+git init
+
+git add .
+
+git commit -m "Huddle Server"
+
+git branch -M main
+
+git remote add origin https://github.com/ScaredCoder1338/huddle-server.git
+
+git push -u origin main
+
+───────────────────────────────────────────────────────────
+
+📌 ШАГ 4: АВТОРИЗАЦИЯ
+
+При git push попросит логин/пароль:
+
+Username: ScaredCoder1338
+
+Password: НЕ ПАРОЛЬ! Нужен Personal Access Token:
+1. Перейди: https://github.com/settings/tokens
+2. Нажми "Generate new token (classic)"
+3. Выбери срок: 90 дней
+4. Поставь галочку: repo
+5. Нажми "Generate token"
+6. СКОПИРУЙ ТОКЕН (показывается только раз!)
+7. Вставь токен вместо пароля
+
+───────────────────────────────────────────────────────────
+
+📌 ШАГ 5: ПРОВЕРЬ
+
+Открой: https://github.com/ScaredCoder1338/huddle-server
+
+Должны быть все файлы!
+
+───────────────────────────────────────────────────────────
+
+📌 ШАГ 6: ДЕПЛОЙ НА RAILWAY
+
+1. Перейди: https://railway.app
+2. Login with GitHub
+3. New Project → Deploy from GitHub repo
+4. Выбери: huddle-server
+5. Жди деплоя (2-3 минуты)
+6. Settings → Generate Domain
+7. Скопируй URL
+
+───────────────────────────────────────────────────────────
+
+📌 ШАГ 7: ОБНОВИ КЛИЕНТ
+
+Файл: Huddle/Services/ChatService.cs
+
+Было:
+private readonly string _serverUrl = "http://localhost:5000/chathub";
+
+Стало:
+private readonly string _serverUrl = "https://твой-url.railway.app/chathub";
+
+Затем:
+cd Huddle
+dotnet build Huddle.csproj
+
+───────────────────────────────────────────────────────────
+
+🎉 ГОТОВО! Сервер работает 24/7 в интернете!
+
+═══════════════════════════════════════════════════════════

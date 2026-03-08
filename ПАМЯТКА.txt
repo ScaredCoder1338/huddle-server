@@ -1,0 +1,79 @@
+═══════════════════════════════════════════════════════════
+  🚀 HUDDLE SERVER - БЫСТРАЯ ПАМЯТКА
+═══════════════════════════════════════════════════════════
+
+📌 САМЫЙ БЫСТРЫЙ СПОСОБ (2 минуты):
+
+1. Скачай ngrok: https://ngrok.com/download
+2. Запусти сервер: dotnet run
+3. Запусти ngrok: ngrok http 5000
+4. Скопируй URL из ngrok
+5. Обнови ChatService.cs с новым URL
+6. Готово!
+
+⚠️ Работает только пока включен компьютер
+
+───────────────────────────────────────────────────────────
+
+📌 ПОСТОЯННЫЙ СЕРВЕР 24/7 (5 минут):
+
+1. Загрузи код на GitHub:
+   cd Huddle/HuddleServer
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin https://github.com/USERNAME/huddle-server.git
+   git push -u origin main
+
+2. Зайди на https://railway.app
+3. Login with GitHub
+4. New Project → Deploy from GitHub repo
+5. Выбери huddle-server
+6. Settings → Generate Domain
+7. Скопируй URL
+8. Обнови ChatService.cs с новым URL
+9. Готово!
+
+✅ Работает 24/7, бесплатно 500 часов/месяц
+
+───────────────────────────────────────────────────────────
+
+📝 ОБНОВЛЕНИЕ URL В КЛИЕНТЕ:
+
+Файл: Huddle/Services/ChatService.cs
+
+Было:
+private readonly string _serverUrl = "http://localhost:5000/chathub";
+
+Стало:
+private readonly string _serverUrl = "https://твой-url.railway.app/chathub";
+
+Затем:
+cd Huddle
+dotnet build Huddle.csproj
+
+───────────────────────────────────────────────────────────
+
+📚 ПОДРОБНЫЕ ИНСТРУКЦИИ:
+
+• NGROK_БЫСТРО.md - для ngrok (2 минуты)
+• БЫСТРЫЙ_СТАРТ.md - для Railway (5 минут)
+• ПОШАГОВАЯ_ИНСТРУКЦИЯ.md - детальная инструкция
+• DEPLOY.md - все варианты деплоя
+
+───────────────────────────────────────────────────────────
+
+🆘 ПРОБЛЕМЫ?
+
+1. Сервер не запускается → проверь логи в Railway
+2. Клиент не подключается → проверь URL (https://)
+3. Connection refused → подожди 1-2 минуты
+
+───────────────────────────────────────────────────────────
+
+💡 РЕКОМЕНДАЦИЯ:
+
+Для тестов: ngrok (быстро, но временно)
+Для постоянного использования: Railway (бесплатно 24/7)
+
+═══════════════════════════════════════════════════════════
