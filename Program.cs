@@ -27,7 +27,16 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate(); // Используем миграции вместо EnsureCreated
+    try
+    {
+        // Создаем базу данных и все таблицы
+        db.Database.EnsureCreated();
+        Console.WriteLine("✅ База данных создана успешно");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"❌ Ошибка создания базы данных: {ex.Message}");
+    }
 }
 
 app.UseCors("AllowAll");
