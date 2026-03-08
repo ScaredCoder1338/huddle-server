@@ -29,10 +29,9 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     try
     {
-        // Удаляем старую базу и создаем новую с обновленной схемой
-        db.Database.EnsureDeleted();
+        // Создаем базу данных если её нет
         db.Database.EnsureCreated();
-        Console.WriteLine("✅ База данных создана успешно с новой схемой");
+        Console.WriteLine("✅ База данных готова");
     }
     catch (Exception ex)
     {
