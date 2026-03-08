@@ -55,11 +55,11 @@ public class ChatHub : Hub
         // Отправить сообщение получателю
         if (ConnectedUsers.TryGetValue(receiverId, out var connectionId))
         {
-            await Clients.Client(connectionId).SendAsync("ReceiveMessage", message);
+            await Clients.Client(connectionId).SendAsync("ReceiveMessage", message.SenderUsername, message.Content, message.SenderId, message.Timestamp);
         }
 
         // Отправить подтверждение отправителю
-        await Clients.Caller.SendAsync("MessageSent", message);
+        await Clients.Caller.SendAsync("MessageSent", message.SenderUsername, message.Content, message.SenderId, message.Timestamp);
     }
 
     public async Task<List<Message>> GetMessageHistory(string userId1, string userId2)
