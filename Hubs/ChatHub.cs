@@ -148,4 +148,10 @@ public class ChatHub : Hub
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         return user;
     }
+
+    public async Task NotifyProfileUpdate(string username)
+    {
+        // Уведомляем всех подключенных пользователей об обновлении профиля
+        await Clients.All.SendAsync("ProfileUpdated", username);
+    }
 }

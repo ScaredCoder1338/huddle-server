@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
 using HuddleServer.Data;
 using HuddleServer.Models;
+using HuddleServer.Hubs;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -12,10 +14,12 @@ namespace HuddleServer.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly AppDbContext _context;
+    private readonly IHubContext<ChatHub> _hubContext;
 
-    public AuthController(AppDbContext context)
+    public AuthController(AppDbContext context, IHubContext<ChatHub> hubContext)
     {
         _context = context;
+        _hubContext = hubContext;
     }
 
     [HttpPost("register")]
@@ -157,6 +161,9 @@ public class AuthController : ControllerBase
             user.AvatarUrl = request.AvatarUrl;
 
             await _context.SaveChangesAsync();
+
+            // Уведомляем всех пользователей об обновлении профиля
+            await _hubContext.Clients.All.SendAsync("ProfileUpdated", user.Username, user.DisplayName, user.AboutMe, user.AvatarUrl);
 
             return Ok(new { message = "Профиль обновлен" });
         }
