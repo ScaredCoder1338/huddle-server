@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using HuddleServer.Models;
 using HuddleServer.Data;
 
@@ -70,5 +71,59 @@ public class ChatHub : Hub
             .ToList();
 
         return messages;
+    }
+
+    public async Task<bool> RegisterNewUser(string username, string email, string passwordHash)
+    {
+        try
+        {
+            // Проверяем существует ли пользователь
+            var existingUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == username || u.Email == email);
+
+            if (existingUser != null)
+            {
+                return false; // Пользователь уже существует
+            }
+
+            var user = new User
+            {
+                Username = username,
+                Email = email,
+                PasswordHash = passwordHash,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public async Task<User?> LoginUser(string email, string passwordHash)
+    {
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Email == email && u.PasswordHash == passwordHash);
+        return user;
+    }
+
+    public async Task<List<string>> SearchUsers(string searchQuery)
+    {
+        var users = await _context.Users
+            .Where(u => u.Username.Contains(searchQuery))
+            .Select(u => u.Username)
+            .Take(10)
+            .ToListAsync();
+        return users;
+    }
+
+    public async Task<int> GetUserIdByUsername(string username)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+        return user?.Id ?? 0;
     }
 }
