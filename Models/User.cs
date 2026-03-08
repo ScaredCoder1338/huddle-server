@@ -7,4 +7,9 @@ public class User
     public string Email { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    
+    // Профильные данные
+    public string? DisplayName { get; set; }
+    public string? AboutMe { get; set; }
+    public string? AvatarUrl { get; set; }
 }

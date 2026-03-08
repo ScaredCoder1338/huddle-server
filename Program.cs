@@ -29,9 +29,10 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     try
     {
-        // Создаем базу данных и все таблицы
+        // Удаляем старую базу и создаем новую с обновленной схемой
+        db.Database.EnsureDeleted();
         db.Database.EnsureCreated();
-        Console.WriteLine("✅ База данных создана успешно");
+        Console.WriteLine("✅ База данных создана успешно с новой схемой");
     }
     catch (Exception ex)
     {
@@ -40,6 +41,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseCors("AllowAll");
+app.UseStaticFiles(); // Для раздачи загруженных файлов
 app.MapControllers(); // Добавляем маршруты контроллеров
 app.MapHub<ChatHub>("/chathub");
 

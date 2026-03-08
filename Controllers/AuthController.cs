@@ -128,3 +128,71 @@ public class LoginRequest
     public string Email { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
 }
+
+    [HttpGet("profile/{username}")]
+    public async Task<IActionResult> GetUserProfile(string username)
+    {
+        try
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (user == null)
+            {
+                return NotFound(new { message = "Пользователь не найден" });
+            }
+
+            return Ok(new UserProfileResponse
+            {
+                Id = user.Id,
+                Username = user.Username,
+                DisplayName = user.DisplayName,
+                AboutMe = user.AboutMe,
+                AvatarUrl = user.AvatarUrl
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = $"Ошибка: {ex.Message}" });
+        }
+    }
+
+    [HttpPost("profile/update")]
+    public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest request)
+    {
+        try
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId);
+            if (user == null)
+            {
+                return NotFound(new { message = "Пользователь не найден" });
+            }
+
+            user.DisplayName = request.DisplayName;
+            user.AboutMe = request.AboutMe;
+            user.AvatarUrl = request.AvatarUrl;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Профиль обновлен" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = $"Ошибка: {ex.Message}" });
+        }
+    }
+}
+
+public class UserProfileResponse
+{
+    public int Id { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public string? DisplayName { get; set; }
+    public string? AboutMe { get; set; }
+    public string? AvatarUrl { get; set; }
+}
+
+public class UpdateProfileRequest
+{
+    public int UserId { get; set; }
+    public string? DisplayName { get; set; }
+    public string? AboutMe { get; set; }
+    public string? AvatarUrl { get; set; }

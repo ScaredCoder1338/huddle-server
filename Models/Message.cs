@@ -9,4 +9,10 @@ public class Message
     public string Content { get; set; } = string.Empty;
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
     public bool IsRead { get; set; } = false;
+    
+    // Тип сообщения: text, image, video
+    public string MessageType { get; set; } = "text";
+    
+    // URL для медиа файлов
+    public string? MediaUrl { get; set; }
 }
