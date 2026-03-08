@@ -114,20 +114,6 @@ public class AuthController : ControllerBase
             return StatusCode(500, new { message = $"Ошибка: {ex.Message}" });
         }
     }
-}
-
-public class RegisterRequest
-{
-    public string Username { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string PasswordHash { get; set; } = string.Empty;
-}
-
-public class LoginRequest
-{
-    public string Email { get; set; } = string.Empty;
-    public string PasswordHash { get; set; } = string.Empty;
-}
 
     [HttpGet("profile/{username}")]
     public async Task<IActionResult> GetUserProfile(string username)
@@ -181,6 +167,19 @@ public class LoginRequest
     }
 }
 
+public class RegisterRequest
+{
+    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
+}
+
+public class LoginRequest
+{
+    public string Email { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
+}
+
 public class UserProfileResponse
 {
     public int Id { get; set; }
@@ -196,3 +195,4 @@ public class UpdateProfileRequest
     public string? DisplayName { get; set; }
     public string? AboutMe { get; set; }
     public string? AvatarUrl { get; set; }
+}

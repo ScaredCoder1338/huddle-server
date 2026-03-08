@@ -126,7 +126,6 @@ public class ChatHub : Hub
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         return user?.Id ?? 0;
     }
-}
 
     public async Task MarkMessageAsRead(int messageId)
     {
@@ -149,3 +148,4 @@ public class ChatHub : Hub
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         return user;
     }
+}
