@@ -7,7 +7,7 @@ namespace HuddleServer.Controllers;
 [Route("api/[controller]")]
 public class UpdateController : ControllerBase
 {
-    private const string CurrentVersion = "1.0.5";
+    private const string CurrentVersion = "1.0.6";
     private const string DownloadUrl = "https://huddle-server-production-ea35.up.railway.app/api/update/download";
     private readonly IWebHostEnvironment _env;
 
@@ -32,13 +32,13 @@ public class UpdateController : ControllerBase
         {
             version = CurrentVersion,
             downloadUrl = DownloadUrl,
-            releaseNotes = @"Что нового в версии 1.0.5:
+            releaseNotes = @"Что нового в версии 1.0.6:
+✅ Исправлена система обновлений
 ✅ Исправлена регистрация - показывает успех
 ✅ Исправлена кнопка сохранения профиля
-✅ Убрано окно загрузки (было проблемой)
+✅ Убрано окно загрузки
 ✅ Синхронизация профилей в реальном времени
-✅ Аватарка и ник в шапке чата
-✅ Все работает стабильно через сервер",
+✅ Аватарка и ник в шапке чата",
             isRequired = false,
             fileSize = fileSize
         };
