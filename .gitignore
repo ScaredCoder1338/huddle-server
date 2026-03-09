@@ -41,3 +41,6 @@ bld/
 *.dll
 *.exe
 *.pdb
+
+# Исключение для файла обновления
+!updates/Huddle.exe
