@@ -8,7 +8,7 @@ namespace HuddleServer.Controllers;
 public class UpdateController : ControllerBase
 {
     private const string CurrentVersion = "1.0.4";
-    private const string DownloadUrl = "https://huddle-server-production-ea35.up.railway.app/api/updates/download";
+    private const string DownloadUrl = "https://huddle-server-production-ea35.up.railway.app/api/update/download";
     private readonly IWebHostEnvironment _env;
 
     public UpdateController(IWebHostEnvironment env)
